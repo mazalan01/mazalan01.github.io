@@ -1,6 +1,7 @@
 var cities=[];
 var cities_table=[];
 var journeies=[];
+var date_array=[];
 
 window.onload = function() {
   var fileInput = document.getElementById('upload-file');
@@ -33,6 +34,27 @@ function split_data(data){
   for(var i=0;i<journey.length;i++){
     if((typeof journey[i][0]=="string" && journey[i][0]!="") && c.indexOf(journey[i][0])==-1)c.push(journey[i][0]);
     if((typeof journey[i][1]=="string" && journey[i][1]!="") && c.indexOf(journey[i][1])==-1 )c.push(journey[i][1]);
+  }
+  var dates=[];
+  var time=[];
+  for(var i=0;i<journey.length;i++){
+    if(typeof journey[i]!="undefined"){
+      if(journey[i].length>2 && typeof journey[i][2]=="string" && journey[i][2]!=""){
+        var d=journey[i][2].substring(0,4);
+        var place=dates.indexOf(d);
+        if(place==-1){
+          dates.push(d);
+          time.push(1);
+        }
+        else{
+          time[place]++;
+        }
+      }
+    }
+  }
+  date_array.push(['Dates', 'Jounies number']);
+  for(var i=0;i<dates.length;i++){
+    date_array.push([dates[i],time[i]]);
   }
   for(var i=0;i<c.length;i++){
     cities.push([c[i],true]);

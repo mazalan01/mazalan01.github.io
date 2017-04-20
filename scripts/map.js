@@ -50,7 +50,7 @@ function load(){
     document.getElementById("content").hidden=false;
     
     draw_table();
-draw_gids();
+    draw_gids();
     draw_map(coordinates);
   }
 }
@@ -68,9 +68,21 @@ function get_coordinates(name,coor_place){
 }
 
 function draw_map(locations){
+  var x=47.497;
+  var y=19.040;
+  var zoom=3;
+  if(city_name!=""){
+    for(var i=0;i<locations.length;i++){
+      if(locations[i][0]==city_name){
+        x=locations[i][1];
+        y=locations[i][2];
+        zoom=4;
+      }
+    }
+  }
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 3,
-    center: new google.maps.LatLng(47.497, 19.040),
+    zoom: zoom,
+    center: new google.maps.LatLng(x, y),
     mapTypeId: 'terrain'
   });
 
@@ -98,6 +110,10 @@ function draw_map(locations){
   for(var i=0;i<journeies.length;i++)if(journeies[i][2]>max)max=journeies[i][2];
 
   for(var i = 1 ; i < journeies.length ; i++){
+    var color='#FF0000';
+    if(city_name!="" && (journeies[i][0]==city_name || journeies[i][1]==city_name)){
+      color='#000066';
+    } 
   //  if(can_show(travel_array[i])){
       //alert(travel_array[i][0].toString()+" "+travel_array[i][1].toString()+" "+travel_array[i][2].toString()+" "+travel_array[i][3].toString());
     // alert(locations[ci.indexOf(journeies[i][0])][1]);
@@ -109,7 +125,7 @@ function draw_map(locations){
       var flightPath = new google.maps.Polyline({
         path: flightPlanCoordinates,
         geodesic: true,
-        strokeColor: '#FF0000',
+        strokeColor: color,
         strokeOpacity: 1.0,
         strokeWeight:(parseInt(journeies[i][2])*3/max+0.5)
       });
