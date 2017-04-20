@@ -22,9 +22,32 @@
         var table = new google.visualization.Table(document.getElementById('table_city_names'));
 
         table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+
+        google.visualization.events.addListener(table, 'select', selectHandler);
       }
 
-
+      function selectHandler() {
+        var selection = table.getSelection();
+        var message = '';
+        for (var i = 0; i < selection.length; i++) {
+          var item = selection[i];
+          if (item.row != null && item.column != null) {
+            var str = data.getFormattedValue(item.row, item.column);
+            message += '{row:' + item.row + ',column:' + item.column + '} = ' + str + '\n';
+          } else if (item.row != null) {
+            var str = data.getFormattedValue(item.row, 0);
+            message += '{row:' + item.row + ', column:none}; value (col 0) = ' + str + '\n';
+          } else if (item.column != null) {
+            var str = data.getFormattedValue(0, item.column);
+            message += '{row:none, column:' + item.column + '}; value (row 0) = ' + str + '\n';
+          }
+        }
+        if (message == '') {
+          message = 'nothing';
+        }
+        alert('You selected ' + message);
+      }
+      
       function sort(array){
         var opposite=[];
         for(var i=0;i<array.length;i++){
