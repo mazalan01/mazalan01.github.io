@@ -1,16 +1,18 @@
 
+
+function get_country(x,y,p){
  var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'latLng': {lat: -34.397, lng: 150.644}}, function(results, status) {
-        alert("c");
+    geocoder.geocode({'latLng': {lat: x, lng: y}}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
-                    alert("b");
+
                     var loc = getCountry(results);
-                    alert(loc);
+                    //alert(loc);
+                    coordinates[p][3]=loc;
                 }
             }
         });
-
+    }
     function getCountry(results)
     {
         for (var i = 0; i < results[0].address_components.length; i++)

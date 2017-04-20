@@ -9,6 +9,8 @@ function make_map(){
       c.push(cities[i][0]);
       c.push("");
       c.push("");
+      c.push("");
+      c.push("");
       if(c_size>coordinates.length-1)coordinates.push([]);
       coordinates[c_size]=c;
       get_coordinates(cities[i][0],c_size);
@@ -25,10 +27,19 @@ function get_percent(){
   var all=0;
   var ready=0;
   for(var i=0;i<coordinates.length;i++){
-    all+=2;
+    all+=3;
     if(coordinates[i][1]!="")ready++;
     if(coordinates[i][2]!="")ready++;
-    else{get_coordinates(coordinates[i][0],i)}
+    if(coordinates[i][1]!="" && coordinates[i][2]!="" && coordinates[i][4]==""){
+      get_country(coordinates[i][1],coordinates[i][2],i);
+     coordinates[i][4]="1";
+    }
+    else if(coordinates[i][4]==""){get_coordinates(coordinates[i][0],i)}
+      else{
+        if(coordinates[i][4].length=5)coordinates[i][4]="";
+
+      }
+    if(coordinates[i][3]!=""){ready++;coordinates[i][4]="aaaaaaaa";}
   }
   return 100*ready/all;
 }
@@ -38,6 +49,7 @@ function load(){
   var percent=get_percent();
   if(parseInt(document.getElementById("load_percent").innerHTML)!=100)
   {
+   // alert(coordinates);
     document.getElementById("load_percent").innerHTML=percent.toFixed(1).toString()+"%";
     setTimeout(function() {
         load();
@@ -68,6 +80,7 @@ function get_coordinates(name,coor_place){
 }
 
 function draw_map(locations){
+  //alert(coordinates);
   var x=47.497;
   var y=19.040;
   var zoom=3;

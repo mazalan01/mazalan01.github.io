@@ -76,5 +76,13 @@ p.load{
 .chart{
 	 float:left;
 	 margin: 15px;
+	 height: 250px;
 	 width:auto;
+}
+
+.chart2{
+	float:center;
+	 margin: 15px;
+	 height: 375px;
+	 width: 75%;
 }

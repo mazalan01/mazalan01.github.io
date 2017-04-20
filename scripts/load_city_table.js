@@ -1,7 +1,7 @@
       var city_name="";
 
       function draw_table(){
-        google.charts.load('current', {'packages':['table','bar','corechart']});
+        google.charts.load('current', {'packages':['table','bar','corechart','geochart']});
         google.charts.setOnLoadCallback(drawTable);
       }
 

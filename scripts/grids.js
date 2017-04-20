@@ -2,6 +2,7 @@
         //google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawStuff);
         google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawRegionsMap);
       }
 
       function min(a,b){
@@ -51,6 +52,55 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+
+      }
+
+      function country_array(){
+        var c=[];
+        var n=[];
+        var ci=[];
+        for(var i=0;i<coordinates.length;i++){
+          ci.push(coordinates[i][0]);
+        }
+        for(var i=0;i<cities_table.length;i++){
+          var x=ci.indexOf(cities_table[i][0]);
+         // alert(coordinates[x][1]);
+         // var country=get_country(coordinates[x][1],coordinates[x][2]);
+         var country=coordinates[ci.indexOf(cities_table[i][0])][3];
+         // if(country!="")alert(country);
+          var place=c.indexOf(country);
+          if(place==-1){
+            c.push(country);
+            n.push(parseInt(cities_table[i][1]));
+          }
+          else{
+            n[place]+=parseInt(cities_table[i][1]);
+          }
+        }
+       // alert("k");
+        var t=[];
+        t.push(["Country","Importance"]);
+        for(var i=0;i<c.length;i++){
+
+          t.push([c[i],Math.log(parseInt(n[i]))]);
+        }
+        return t;
+      }
+
+
+function drawRegionsMap() {
+
+        var data = google.visualization.arrayToDataTable(country_array());
+
+        var options = {
+          colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
+          backgroundColor: '#81d4fa',
+          datalessRegionColor: '#f8bbd0',
+          defaultColor: '#f5f5f5',};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
         chart.draw(data, options);
       }
