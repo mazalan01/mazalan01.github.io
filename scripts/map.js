@@ -60,7 +60,6 @@ function load(){
     document.getElementById("load").hidden=true;
     //document.getElementById("tablet").hidden=false;
     document.getElementById("content").hidden=false;
-    
     draw_table();
     draw_gids();
     draw_map(coordinates);
@@ -81,6 +80,7 @@ function get_coordinates(name,coor_place){
 
 function draw_map(locations){
   //alert(coordinates);
+
   var x=47.497;
   var y=19.040;
   var zoom=3;
@@ -121,7 +121,7 @@ function draw_map(locations){
  // var travel_array=make_travel_array(); 
   var max=0;
   for(var i=0;i<journeies.length;i++)if(journeies[i][2]>max)max=journeies[i][2];
-
+  if(!volt_fill){fill(journeies);volt_fill=true;}
   for(var i = 1 ; i < journeies.length ; i++){
     var color='#FF0000';
     if(city_name!="" && (journeies[i][0]==city_name || journeies[i][1]==city_name)){

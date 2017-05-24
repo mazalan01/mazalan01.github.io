@@ -12,47 +12,108 @@
     	<link rel="shortcut icon" href="images/title.jpg" />
 	 </head>
 	 <body>
-		<div class="grayBackground">
-			<p class="title">Journey logbook</p>
-			<div class="upload_div">
-				<label for="upload-file" class="upload_button upload_div"></label>
-				<input type="file" name="file" id="upload-file" />
+	 
+		<div class="grayBackground" id="aaa">
+			<div class="title">
+				<p style="font-size: 35px;text-transform: capitalize;margin-top: 50px;margin-left:15px;position: absolute;" id="name">Your</p>
+				<p style="font-size: 55px;text-transform: capitalize;margin-top: 85px;margin-left:15px;position: absolute;">Journey logbook</p>
+				<div class="upload">
+					<label for="upload-file" class="upload">Upload</label>
+					<input type="file" name="file" id="upload-file" class="upload"/>
+				</div>
+				<div class="about">
+					<label for="about-file" class="about">How to</label>
+					<button id="about-file" class="about" onclick="window.open('how_to.html','_self')"></button>
+				</div>
+			</div>
+			<div style="margin:0px 30px 20px 30px;border:1px solid #C1C1C1" >
+			<table class="bc" style="width: 100%;border-collapse: collapse;" id="dTb">
+				<tr style=" height: 120px;">
+					<td align="center" class="border"><img src="images/1journeys.png" id="tb00" class="image"></td>
+					<td align="center" class="border"><img src="images/2km.png" id="tb01" class="image"></td>
+					<td align="center" class="border"><img src="images/3hours.png" id="tb02" class="image"></td>
+					<td align="center" class="border"><img src="images/4cities.png" id="tb03" class="image"></td>
+					<td align="center" class="bc"><img src="images/5longest.png" id="tb04" class="image"></td>
+				</tr>
+				<tr>
+					<td class="border number" id="tb10">0</td>
+					<td class="border number" id="tb11">0</td>
+					<td class="border number" id="tb12">0</td>
+					<td class="border number" id="tb13">0</td>
+					<td class="number" id="tb14">0</td>
+				</tr>
+				<tr>
+					<td class="border text">journeys</td>
+					<td class="border text">km</td>
+					<td class="border text">hours</td>
+					<td class="border text">cities</td>
+					<td class="text" style="padding: 10px 0px 10px 0px;" >km longest</td>
+				</tr>
+			</table>
 			</div>
 			<div class="load" id="load" hidden="true">
 		 		<img src="images/loader.gif" class="load">
 		 		<p id="load_percent" class="load">0%</p>
 		 	</div>
+		 	
 		 	<div id="content" hidden="true">
 			 	<table>
 			 		<tr>
 			 			<td>
 			 				<div class="tableTable" id="tablet">
-			 					<div id="table_city_names" style="height: 400px;"></div>
+			 					<div id="table_city_names" style="height: 320px;" ></div>
 			 				</div>
 			 			</td>
 			 			<td>
-			 				<div id="map" style="width: 500px; height: 400px;" class="map"></div>
+			 				<div id="map" style=" height: 320px;" class="map"></div>
 			 			</td>
 			 		</tr>
 			 	</table>
 			 	<table>
 			 		<tr>
-			 			<td style="width:50%;">
-			 				<div id="top_x_div"  class="chart"></div>
+			 			<td style="height: 220px;">
+			 				<div id="piechart"  class="chart"></div>
 			 			</td>
-			 			<td style="width:50%;">
-			 				 <div id="piechart"  class="chart"></div>
-			 			</td>
-			 		</tr>
-			 		<tr>
-			 			<td>
-			 				
+			 			<td style="height: 220px;">
+			 				 <div id="regions_div" class="chart2"></div>
 			 			</td>
 			 		</tr>
 			 	</table>
-			 	<div id="regions_div" class="chart2"></div>
+			 	<table style="margin:0px 0px 0px 0px;">
+			 		<tr>
+			 			<td style="height: 220px;">
+			 				<div id="top_x_div"  class="chart1"></div>
+			 			</td>
+			 		</tr>
+			 	</table>
 			 </div>
 		</div>
+
+		<script type="text/javascript">
+			//document.getElementById("dTb").style.width="200px";
+			set_h();
+			function set_h(){
+			var n=document.getElementById("dTb").clientWidth;
+			document.getElementById("table_city_names").style.width=(parseInt(n/5*2-10).toString()+"px");
+			document.getElementById("map").style.width=(parseInt(n/5*3-10).toString()+"px");
+			document.getElementById("piechart").style.width=(parseInt(n/5*2-10).toString()+"px");
+			document.getElementById("piechart").style.height="220px";
+			document.getElementById("regions_div").style.width=(parseInt(n/5*3-10).toString()+"px");
+			document.getElementById("regions_div").style.height="220px";
+			document.getElementById("top_x_div").style.width=(parseInt(n).toString()+"px");
+			//alert(document.getElementById("aaa").clientWidth.toString());
+			
+			document.getElementById("aaa").style.height=((parseInt(document.getElementById("aaa").clientWidth*/*1.4142*/1.6).toString())+"px")
+			var he=document.getElementById("aaa").clientHeight;
+			var h=parseInt((he-120-document.getElementById("dTb").clientHeight-180)/3).toString()+"px";
+			//alert(h);
+			document.getElementById("table_city_names").style.height=h;
+			document.getElementById("map").style.height=h;
+			document.getElementById("piechart").style.height=h;
+			document.getElementById("regions_div").style.height=h;
+			document.getElementById("top_x_div").style.height=h;
+			}
+		</script>
 
 		<script type="text/javascript" src="scripts/get_country.js"></script>
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -60,5 +121,7 @@
     	<script type="text/javascript" src="scripts/upload_file.js"></script>
     	<script type="text/javascript" src="scripts/map.js"></script>
     	<script type="text/javascript" src="scripts/grids.js"></script>
+    	<script type="text/javascript" src="scripts/facts.js"></script>
+    	<script type="text/javascript" src="scripts/print.js"></script>
 	 </body>
  </html>

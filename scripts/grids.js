@@ -1,8 +1,26 @@
       function draw_gids(){
         //google.charts.load('current', {'packages':['bar']});
+        var c=[];
+        for(var i=0;i<coordinates.length;i++){
+          c.push(coordinates[i][0]);
+        }
+        for(var i=1;i<journey_grid.length;i++){
+          if(typeof journey_grid[i]!="undefined"){
+            if(journey_grid[i].length>2 && typeof journey_grid[i][2]=="string" && journey_grid[i][2]!=""){
+              for(var j=0;j<date_array.length;j++){
+                if(date_array[j][0]==journey_grid[i][2].substring(0, 4)){
+                  var from=journey_grid[i][0];
+                  var to=journey_grid[i][1];
+                  date_array[j][2]+=parseInt(getDistanceFromLatLonInKm(coordinates[c.indexOf(from)][1],coordinates[c.indexOf(from)][2],coordinates[c.indexOf(to)][1],coordinates[c.indexOf(to)][2])/100)/10;
+                }
+              }
+            }
+          }
+        }
         google.charts.setOnLoadCallback(drawStuff);
         google.charts.setOnLoadCallback(drawChart);
         google.charts.setOnLoadCallback(drawRegionsMap);
+        set_h();
       }
 
       function min(a,b){
@@ -13,14 +31,14 @@
       function drawStuff() {
         var data = new google.visualization.arrayToDataTable(date_array);
         var options = {
-          width: 400,
+          width: parseInt(document.getElementById("dTb").clientWidth),
           legend: { position: 'none' }, 
           axes: {
             x: {
               0: { side: 'top', label: 'Timeline'} // Top x-axis.
             }
           },
-          bar: { groupWidth: "90%" }
+          bar: { groupWidth: "100%" }
         };
 
         var chart = new google.charts.Bar(document.getElementById('top_x_div'));
@@ -95,9 +113,9 @@ function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable(country_array());
 
         var options = {
-          colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
-          backgroundColor: '#81d4fa',
-          datalessRegionColor: '#f8bbd0',
+          colorAxis: {colors: ['#00853f', '#e31b23']},
+          backgroundColor: '#ffffff',
+          datalessRegionColor: '#999999',
           defaultColor: '#f5f5f5',};
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));

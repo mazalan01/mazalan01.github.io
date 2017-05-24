@@ -2,7 +2,7 @@ var cities=[];
 var cities_table=[];
 var journeies=[];
 var date_array=[];
-
+var journey_grid=[];
 window.onload = function() {
   var fileInput = document.getElementById('upload-file');
 
@@ -14,12 +14,22 @@ window.onload = function() {
   reader.onload = function(e) {
     var data = reader.result;
     data = data.replace(/(?:\r\n|\r|\n)/g ,'|');
+
+    getName();
     split_data(data);
     //alert(data);
   }
 
   reader.readAsText(file);    
   });
+}
+
+function getName() {
+    var txt;
+    var person = prompt("Please enter your name:", "");
+    if (!(person == null || person == "")) {
+      document.getElementById("name").innerHTML = person+"'s";
+    }
 }
 
 function split_data(data){
@@ -30,11 +40,12 @@ function split_data(data){
     journey.push(t[i].split(";"));
     }
   }
+
   var c=[];
   for(var i=0;i<journey.length;i++){
     if((typeof journey[i][0]=="string" && journey[i][0]!="") && c.indexOf(journey[i][0])==-1)c.push(journey[i][0]);
     if((typeof journey[i][1]=="string" && journey[i][1]!="") && c.indexOf(journey[i][1])==-1 )c.push(journey[i][1]);
-  }
+  } 
   var dates=[];
   var time=[];
   for(var i=0;i<journey.length;i++){
@@ -52,10 +63,11 @@ function split_data(data){
       }
     }
   }
-  date_array.push(['Dates', 'Jounies number']);
+  date_array.push(['Dates', 'Journeys number','thousand km']);
   for(var i=0;i<dates.length;i++){
-    date_array.push([dates[i],time[i]]);
+    date_array.push([dates[i],time[i],0]);
   }
+  journey_grid=journey;
   for(var i=0;i<c.length;i++){
     cities.push([c[i],true]);
   }
