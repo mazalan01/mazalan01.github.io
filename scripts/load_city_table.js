@@ -10,7 +10,7 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'City names');
         data.addColumn('number', 'Visits');
-        data.paging=true;
+        //data.paging=true;
       //  data.addColumn('boolean', 'Full Time Employee');
       //alert(cities_table);
        /* data.addRows([
@@ -22,12 +22,15 @@
         data.addRows(sort(cities_table));
         if(cities_table.length>=15)
         {
-          document.getElementById("table_city_names").style.height="400px";
+          document.getElementById("table_city_names").style.height=document.getElementById("map").style.height;
         }
-        
+        //alert(cities_table.length);
+        var he=document.getElementById("map").style.height;
+        var e="50px";
+        e=he.toString();
+        //alert(e);
         var table = new google.visualization.Table(document.getElementById('table_city_names'));
-
-        table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+        table.draw(data, {showRowNumber: false, width: '100%', height: e});
         google.visualization.events.addListener(table, 'select', function() {
            var selection = table.getSelection();
            var row=selection[0].row;

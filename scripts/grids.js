@@ -29,6 +29,19 @@
       }
 
       function drawStuff() {
+      /*  alert(date_array[1][0]);
+        var first=date_array[0];
+        var show_array=[];
+        for(var i=1;i<i.length;i++){
+          show_array.push(date_array[i]);
+        }
+        show_array.sort();
+        date_array=[];
+        date_array.push(first);
+        for(var i=0;i<show_array.length;i++){
+          date_array.push(show_array[i]);
+        }
+        alert(date_array);*/
         var data = new google.visualization.arrayToDataTable(date_array);
         var options = {
           width: parseInt(document.getElementById("dTb").clientWidth),

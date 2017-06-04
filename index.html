@@ -1,7 +1,7 @@
  <!DOCTYPE html>
  <html>
 	 <head>
-	 	<title>airplane</title>
+	 	<title id="name_title">Journey Logbook</title>
 	 	<link rel="stylesheet"  href="css/style.css">
 	 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
 	 	 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCi8KFSrV3lAJQxKy406CbVofcv4_Jvd8&callback=initMap"
@@ -12,16 +12,19 @@
     	<link rel="shortcut icon" href="images/title.jpg" />
 	 </head>
 	 <body>
-	 
 		<div class="grayBackground" id="aaa">
-			<div class="title">
+			<div class="title" >
 				<p style="font-size: 35px;text-transform: capitalize;margin-top: 50px;margin-left:15px;position: absolute;" id="name">Your</p>
 				<p style="font-size: 55px;text-transform: capitalize;margin-top: 85px;margin-left:15px;position: absolute;">Journey logbook</p>
-				<div class="upload">
+				<div class="upload" id="upload">
 					<label for="upload-file" class="upload">Upload</label>
 					<input type="file" name="file" id="upload-file" class="upload"/>
 				</div>
-				<div class="about">
+				<div class="print" id="print">
+					<label for="print_page" class="upload">Print</label>
+					<button id="print_page" class="about" onclick="printDiv('printableArea')"></button>
+				</div>
+				<div class="about" id="how_to">
 					<label for="about-file" class="about">How to</label>
 					<button id="about-file" class="about" onclick="window.open('how_to.html','_self')"></button>
 				</div>
@@ -91,6 +94,24 @@
 
 		<script type="text/javascript">
 			//document.getElementById("dTb").style.width="200px";
+			//document.getElementById("name_title").innerHTML="-";
+			function printDiv() {
+				document.getElementById("upload").style.visibility="hidden";
+				document.getElementById("how_to").style.visibility="hidden";
+				document.getElementById("print").style.visibility="hidden";
+			     var printContents = document.getElementById("aaa").innerHTML;
+			     var originalContents = document.body.innerHTML;
+			     //alert(printContents);
+			     document.body.innerHTML = printContents;
+
+			     window.print();
+
+			     document.body.innerHTML = originalContents;
+			     document.getElementById("upload").style.visibility="visible";
+			     document.getElementById("how_to").style.visibility="visible";
+			     document.getElementById("print").style.visibility="visible";
+			}
+
 			set_h();
 			function set_h(){
 			var n=document.getElementById("dTb").clientWidth;
@@ -103,7 +124,7 @@
 			document.getElementById("top_x_div").style.width=(parseInt(n).toString()+"px");
 			//alert(document.getElementById("aaa").clientWidth.toString());
 			
-			document.getElementById("aaa").style.height=((parseInt(document.getElementById("aaa").clientWidth*/*1.4142*/1.6).toString())+"px")
+			document.getElementById("aaa").style.height=((parseInt(document.getElementById("aaa").clientWidth*1.4142/*1.6*/).toString())+"px")
 			var he=document.getElementById("aaa").clientHeight;
 			var h=parseInt((he-120-document.getElementById("dTb").clientHeight-180)/3).toString()+"px";
 			//alert(h);

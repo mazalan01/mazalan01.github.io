@@ -20,7 +20,7 @@ function make_map(){
         coordinates[c_size][3]=data_get_country(ct);
       }
       else{
-        alert(cities[i][0]);
+        //alert(cities[i][0]);
         get_coordinates(cities[i][0],c_size);
       }
       c_size++;
