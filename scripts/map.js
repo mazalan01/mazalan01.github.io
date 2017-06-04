@@ -13,7 +13,16 @@ function make_map(){
       c.push("");
       if(c_size>coordinates.length-1)coordinates.push([]);
       coordinates[c_size]=c;
-      get_coordinates(cities[i][0],c_size);
+      if(data_is_city(cities[i][0])){
+        var ct=cities[i][0];
+        coordinates[c_size][1]=data_get_lat(ct);
+        coordinates[c_size][2]=data_get_lng(ct);
+        coordinates[c_size][3]=data_get_country(ct);
+      }
+      else{
+        alert(cities[i][0]);
+        get_coordinates(cities[i][0],c_size);
+      }
       c_size++;
     }
 			
