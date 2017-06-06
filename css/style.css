@@ -160,3 +160,16 @@ p.load{
 	margin: 0px 0px 20px 20px;
 }
 
+/*@media print {
+  body * {
+    visibility: hidden;
+  }
+  #aaa * {
+    visibility: visible;
+  }
+  #aaa {
+    position: absolute;
+  /*  left: 0;
+    top: 0;*/
+  }
+}*/

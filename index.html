@@ -32,7 +32,7 @@
 			<div style="margin:0px 30px 20px 30px;border:1px solid #C1C1C1" >
 			<table class="bc" style="width: 100%;border-collapse: collapse;" id="dTb">
 				<tr style=" height: 120px;">
-					<td align="center" class="border"><img src="images/1journeys.png" id="tb00" class="image"></td>
+					<td align="center" class="border"><img src="images/1journeys.png" id="tb00" class="image" width="500px"></td>
 					<td align="center" class="border"><img src="images/2km.png" id="tb01" class="image"></td>
 					<td align="center" class="border"><img src="images/3hours.png" id="tb02" class="image"></td>
 					<td align="center" class="border"><img src="images/4cities.png" id="tb03" class="image"></td>
@@ -95,15 +95,21 @@
 		<script type="text/javascript">
 			//document.getElementById("dTb").style.width="200px";
 			//document.getElementById("name_title").innerHTML="-";
+			//document.getElementById("aaa").style.margin="0px";
+			//document.getElementById("aaa").style.width="100%";
+document.getElementById("myFrame1").style.visibility="hidden";
+			set_h();
+
 			function printDiv() {
 				document.getElementById("upload").style.visibility="hidden";
 				document.getElementById("how_to").style.visibility="hidden";
 				document.getElementById("print").style.visibility="hidden";
 			     var printContents = document.getElementById("aaa").innerHTML;
-			     var originalContents = document.body.innerHTML;
+			    var originalContents = document.body.innerHTML;
 			     //alert(printContents);
 			     document.body.innerHTML = printContents;
-
+			    	//document.getElementById("aaa").style.width="100%";
+			    	//set_h();
 			     window.print();
 
 			     document.body.innerHTML = originalContents;
@@ -144,5 +150,9 @@
     	<script type="text/javascript" src="scripts/grids.js"></script>
     	<script type="text/javascript" src="scripts/facts.js"></script>
     	<script type="text/javascript" src="scripts/print.js"></script>
+    	<!--<div id="myFrame1">
+    		<iframe id="myFrame"></iframe>
+    	</div>-->
+    	
 	 </body>
  </html>
